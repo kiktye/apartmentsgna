@@ -74,32 +74,64 @@
     </div>
 
 
-    <nav class="pt-3 md:py-2 text-black bg-shadowed drop-shadow-lg">
-        <div class="flex flex-col md:flex-row justify-between items-center md:w-[80%] md:mx-auto md:px-10">
-            <!-- Logo -->
-            <div class="w-[8rem] h-[8rem] md:w-[6rem] md:h-[6rem] mb-4 md:mb-0">
-                <a href="/" draggable="false">
-                    <img class="rounded-full" draggable="false" src="{{ Vite::asset('resources/images/gna-logo.jpg') }}"
-                        alt="Logo">
-                </a>
-            </div>
+    <nav class="py-10 px-4 md:px-10 text-black bg-shadowed drop-shadow-lg">
+        <div class="md:w-[80%] md:mx-auto">
+            <div class="relative flex items-center justify-between h-16">
+                <!-- Mobile menu button -->
+                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                    <button type="button"
+                        class="relative inline-flex items-center justify-center p-2 text-gna hover:text-gna"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
 
-            <!-- Nav Links -->
-            <div class="flex justify-center align-items-center space-x-6 bg-shadowed py-2">
-                <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-                <x-nav-link href="{{ route('buildings.filter') }}" :active="request()->is('buildings/filter')">Buildings</x-nav-link>
-                <x-nav-link href="{{ route('about') }}" :active="request()->is('about')">About</x-nav-link>
-                <x-nav-link href="{{ route('contact') }}" :active="request()->is('contact')">Contact</x-nav-link>
-            </div>
+                <!-- Logo -->
+                <div class="flex items-center justify-center flex-1 sm:flex-none">
+                    <div class="w-[8rem] h-[8rem] md:w-[7rem] md:h-[7rem]">
+                        <a href="/" draggable="false">
+                            <img class="rounded-full" draggable="false"
+                                src="{{ Vite::asset('resources/images/gna-logo.jpg') }}" alt="Logo">
+                        </a>
+                    </div>
+                </div>
 
-            <!-- Auth Links -->
-            <div class="mt-4 md:mt-0">
-                @auth
-                    <a href="/buildings/create" class="font-bold text-lg block text-center md:inline-block">Building</a>
-                @endauth
+                <!-- Nav Links -->
+                <div class="hidden sm:flex flex-1 items-center justify-center sm:ml-6">
+                    <div class="flex space-x-4">
+                        <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
+                        <x-nav-link href="{{ route('buildings.filter') }}" :active="request()->is('buildings/filter')">Buildings</x-nav-link>
+                        <x-nav-link href="{{ route('about') }}" :active="request()->is('about')">About</x-nav-link>
+                        <x-nav-link href="{{ route('contact') }}" :active="request()->is('contact')">Contact</x-nav-link>
+                    </div>
+                </div>
+
+                <!-- Right section -->
+                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <!-- Additional right section items can be added here -->
+                </div>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile menu -->
+    <div class="sm:hidden fixed top-25 left-0 right-0 z-50 bg-shadowed drop-shadow-lg hidden" id="mobile-menu">
+        <div class="space-y-1 px-2 pb-3 pt-2 transition-all duration-300">
+            <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
+            <x-nav-link href="{{ route('buildings.filter') }}" :active="request()->is('buildings/filter')">Buildings</x-nav-link>
+            <x-nav-link href="{{ route('about') }}" :active="request()->is('about')">About</x-nav-link>
+            <x-nav-link href="{{ route('contact') }}" :active="request()->is('contact')">Contact</x-nav-link>
+        </div>
+    </div>
 
 
     <main id="page-slot">

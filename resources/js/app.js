@@ -2,6 +2,54 @@ import "./bootstrap";
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 
+document.addEventListener('DOMContentLoaded', function () {
+    const menuButton = document.querySelector('button[aria-controls="mobile-menu"]');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuOpenIcon = menuButton.querySelector('svg.block');
+    const menuCloseIcon = menuButton.querySelector('svg.hidden');
+
+    
+    menuButton.setAttribute('aria-expanded', 'false');
+    mobileMenu.classList.add('hidden');
+
+    function closeMenu() {
+        menuButton.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+        setTimeout(() => {
+            mobileMenu.classList.add('hidden');
+        }, 300); 
+
+        menuOpenIcon.classList.remove('hidden');
+        menuCloseIcon.classList.add('hidden');
+    }
+
+    menuButton.addEventListener('click', function () {
+        const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+
+        if (isExpanded) {
+            closeMenu();
+        } else {
+            menuButton.setAttribute('aria-expanded', 'true');
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => {
+                mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+            }, 10);
+
+            menuOpenIcon.classList.add('hidden');
+            menuCloseIcon.classList.remove('hidden');
+        }
+    });
+
+    // Closing the hamburger menu if user scrolls while open
+    window.addEventListener('scroll', function () {
+        if (menuButton.getAttribute('aria-expanded') === 'true') {
+            closeMenu();
+        }
+    });
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
         const slot = document.getElementById("page-slot");
