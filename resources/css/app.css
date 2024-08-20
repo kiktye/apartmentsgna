@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+#page-slot {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#swiperContainer {
+    display: none;
+}
+
+input[type="radio"]  {
+    display: none;
+ }
