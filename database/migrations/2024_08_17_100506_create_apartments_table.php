@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('apartment_type');
             $table->text('info');
             $table->string('photo_path');
+            $table->string('photo_pathTwo');
             $table->timestamps();
 
             $table->foreign('building_id')->references('id')->on('buildings')->onDelete('cascade');

@@ -1,6 +1,6 @@
 <x-layout>
 
-<div class="bg-shadowed py-8">
+<div class="bg-shadowed pt-10 pb-[85px]">
     <x-forms.form action="{{ route('buildings.filter') }}" class="text-shadowed">
         <x-forms.field name="status">
             <x-forms.checkbox
@@ -48,6 +48,6 @@
 </div>
 
 
-
+<x-footer> </x-footer>
 
 </x-layout>

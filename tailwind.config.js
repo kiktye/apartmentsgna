@@ -20,7 +20,7 @@ export default {
         "hanken-grotesk": ["Hanken Grotesk", "sans-serif"],
       },
       boxShadow: {
-        '3xl': 'rgba(0, 0, 0, 0.16) 0px 0px 51px 51px;',
+        '3xl': 'rgba(0, 0, 0, 0.13) 0px 0px 51px 51px;',
         'hover': 'rgba(0, 0, 0, 0.12) 0px 50px 70px 40px;',
         'card': 'rgba(0, 0, 0, 0.15) 0px 20px 40px 20px;'
       },

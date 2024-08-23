@@ -1,4 +1,4 @@
-<div class="bg-shadowed py-10">
+<div class="bg-shadowed pt-6 pb-[85px]">
 
     <div class="w-[80%] mx-auto h-auto md:h-[75vh] flex flex-col-reverse md:flex-row justify-evenly items-center">
 
@@ -30,7 +30,7 @@
 
         <div id="image-container" class="mb-4 md:mb-0">
             <img class="rounded-lg w-full md:w-auto shadow-hover md:shadow-3xl" draggable="false"
-                src="{{ Vite::asset('resources/images/zgrada.png') }}">
+                src="{{ Vite::asset('resources/images/intro.png') }}">
         </div>
 
     </div>
