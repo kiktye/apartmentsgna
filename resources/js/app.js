@@ -2,62 +2,61 @@ import "./bootstrap";
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 
-document.addEventListener('DOMContentLoaded', function () {
-    const menuButton = document.querySelector('button[aria-controls="mobile-menu"]');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuOpenIcon = menuButton.querySelector('svg.block');
-    const menuCloseIcon = menuButton.querySelector('svg.hidden');
+document.addEventListener("DOMContentLoaded", function () {
+    // Hamburger Menu
+    const menuButton = document.querySelector(
+        'button[aria-controls="mobile-menu"]'
+    );
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuOpenIcon = menuButton.querySelector("svg.block");
+    const menuCloseIcon = menuButton.querySelector("svg.hidden");
 
-    
-    menuButton.setAttribute('aria-expanded', 'false');
-    mobileMenu.classList.add('hidden');
+    menuButton.setAttribute("aria-expanded", "false");
+    mobileMenu.classList.add("hidden");
 
     function closeMenu() {
-        menuButton.setAttribute('aria-expanded', 'false');
-        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+        menuButton.setAttribute("aria-expanded", "false");
+        mobileMenu.classList.add("opacity-0", "pointer-events-none");
+        mobileMenu.classList.remove("opacity-100", "pointer-events-auto");
         setTimeout(() => {
-            mobileMenu.classList.add('hidden');
-        }, 300); 
+            mobileMenu.classList.add("hidden");
+        }, 300);
 
-        menuOpenIcon.classList.remove('hidden');
-        menuCloseIcon.classList.add('hidden');
+        menuOpenIcon.classList.remove("hidden");
+        menuCloseIcon.classList.add("hidden");
     }
 
-    menuButton.addEventListener('click', function () {
-        const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.addEventListener("click", function () {
+        const isExpanded = menuButton.getAttribute("aria-expanded") === "true";
 
         if (isExpanded) {
             closeMenu();
         } else {
-            menuButton.setAttribute('aria-expanded', 'true');
-            mobileMenu.classList.remove('hidden');
+            menuButton.setAttribute("aria-expanded", "true");
+            mobileMenu.classList.remove("hidden");
             setTimeout(() => {
-                mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
-                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                mobileMenu.classList.add("opacity-100", "pointer-events-auto");
+                mobileMenu.classList.remove("opacity-0", "pointer-events-none");
             }, 10);
 
-            menuOpenIcon.classList.add('hidden');
-            menuCloseIcon.classList.remove('hidden');
+            menuOpenIcon.classList.add("hidden");
+            menuCloseIcon.classList.remove("hidden");
         }
     });
 
-    // Closing the hamburger menu if user scrolls while open
-    window.addEventListener('scroll', function () {
-        if (menuButton.getAttribute('aria-expanded') === 'true') {
+    window.addEventListener("scroll", function () {
+        if (menuButton.getAttribute("aria-expanded") === "true") {
             closeMenu();
         }
     });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
+    // Loading animation
     setTimeout(function () {
         const slot = document.getElementById("page-slot");
 
         slot.style.opacity = "1";
         slot.style.visibility = "visible";
 
-        // Animations
         gsap.from("#first-paragraph", {
             x: -200,
             opacity: 0,
@@ -84,6 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }, 200);
 
+    // Scroll-Based Animations
     const introText = document.querySelector("#intro-text");
 
     window.addEventListener("scroll", () => {
@@ -107,37 +107,41 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    document
-        .getElementById("detailsButton")
-        .addEventListener("click", function () {
-            const buildingContainer =
-                document.getElementById("buildingContainer");
-            const swiperContainer = document.getElementById("swiperContainer");
-            const swiperWrapper = document.getElementById("swiperWrapper");
+    // Show Details Container
+    document.getElementById("detailsButton").addEventListener("click", function () {
+        const buildingContainer = document.getElementById("buildingContainer");
+        const swiperContainer = document.getElementById("swiperContainer");
+        const swiperWrapper = document.getElementById("swiperWrapper");
 
-            gsap.to(buildingContainer, {
-                duration: 0.35,
-                x: "-100%",
-                opacity: 0,
-                onComplete: function () {
-                    buildingContainer.style.display = "none";
-                    buildingContainer.classList.add("hidden");
-                    swiperContainer.style.display = "block";
-                    swiperWrapper.classList.remove("hidden");
+        const initialScrollY = window.scrollY;
 
-                    gsap.from(swiperContainer, {
-                        duration: 0.35,
-                        x: "100%",
-                        opacity: 0,
-                    });
-                },
-            });
+        gsap.to(buildingContainer, {
+            duration: 0.35,
+            x: "-100%",
+            opacity: 0,
+            onComplete: function () {
+                buildingContainer.style.display = "none";
+                buildingContainer.classList.add("hidden");
+                swiperContainer.style.display = "block";
+                swiperWrapper.classList.remove("hidden");
+
+                if (initialScrollY > 0) {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+
+                gsap.from(swiperContainer, {
+                    duration: 0.35,
+                    x: "100%",
+                    opacity: 0,
+                });
+            },
         });
+    });
 
+    // Go Back Button
     document.querySelectorAll("#backButton").forEach((button) => {
         button.addEventListener("click", function () {
-            const buildingContainer =
-                document.getElementById("buildingContainer");
+            const buildingContainer = document.getElementById("buildingContainer");
             const swiperContainer = document.getElementById("swiperContainer");
             const swiperWrapper = document.getElementById("swiperWrapper");
 
@@ -145,6 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
             buildingContainer.style.display = "block";
             swiperWrapper.classList.add("hidden");
             buildingContainer.classList.remove("hidden");
+
+            if (window.scrollY > 0) {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
 
             gsap.fromTo(
                 buildingContainer,
@@ -160,30 +168,31 @@ document.addEventListener("DOMContentLoaded", function () {
             );
         });
     });
-});
 
-var swiper = new Swiper(".swiper-container", {
-    loop: false,
-    centeredSlides: true,
-    slidesPerView: 1,
-    spaceBetween: 20,
-    slideToClickedSlide: true,
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-    breakpoints: {
-        640: {
-            spaceBetween: 5,
+    // Carousel Swiper
+    var swiper = new Swiper(".swiper-container", {
+        loop: false,
+        centeredSlides: true,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        slideToClickedSlide: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
         },
-        768: {
-            spaceBetween: 20,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
         },
-    },
+        breakpoints: {
+            640: {
+                spaceBetween: 5,
+            },
+            768: {
+                spaceBetween: 20,
+            },
+        },
+    });
 });
 
 function createCounter(elementId, targetNumber, duration) {

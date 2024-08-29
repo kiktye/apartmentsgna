@@ -70,7 +70,7 @@ class BuildingController extends Controller
         }
     
         // Load the building with its related apartments
-        $building = Building::with('apartments')->find($building->id);
+        $building = Building::with('apartments.rooms')->find($building->id);
     
         // Return the view with the building data
         return view('buildings.show', ['building' => $building]);

@@ -56,6 +56,6 @@
         </div>
     </div>
 
-    <div class="bg-gna text-font pt-10 pb-7 flex justify-center">
+    <div class="bg-gna text-font pt-10 pb-2 text-xs flex justify-center">
         <p>&copy; 2024 Apartments GNA. All Rights Reserved</p>
     </div>

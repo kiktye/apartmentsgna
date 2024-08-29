@@ -112,6 +112,7 @@
                         <x-nav-link href="{{ route('buildings.filter') }}" :active="request()->is('buildings/filter')">Buildings</x-nav-link>
                         <x-nav-link href="{{ route('about') }}" :active="request()->is('about')">About</x-nav-link>
                         <x-nav-link href="{{ route('contact') }}" :active="request()->is('contact')">Contact</x-nav-link>
+                        <x-nav-link href="{{ asset('assets/V2 -Станбено Деловен Комплекс TWINS - Каталог.pdf') }}" target="_blank">Catalog</x-nav-link>
                     </div>
                 </div>
 
@@ -130,6 +131,7 @@
             <x-nav-link href="{{ route('buildings.filter') }}" :active="request()->is('buildings/filter')">Buildings</x-nav-link>
             <x-nav-link href="{{ route('about') }}" :active="request()->is('about')">About</x-nav-link>
             <x-nav-link href="{{ route('contact') }}" :active="request()->is('contact')">Contact</x-nav-link>
+            <x-nav-link href="{{ asset('assets/V2 -Станбено Деловен Комплекс TWINS - Каталог.pdf') }}">Catalog</x-nav-link>
         </div>
     </div>
 

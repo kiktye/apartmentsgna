@@ -1,8 +1,8 @@
 <x-layout>
 
-    <div class="bg-gna min-h-[75vh] flex flex-col justify-center items-center pb-[46px] relative overflow-hidden">
+    <div class="bg-gna min-h-[80vh] pb-0 md:pb-[55px] flex flex-col items-center justify-center relative overflow-hidden">
         <!-- Building Container -->
-        <div class="w-[80%] mx-auto flex justify-center py-7  text-shadowed" id="buildingContainer">
+        <div class="w-[80%] mx-auto flex justify-center py-7 text-shadowed" id="buildingContainer">
             <div class="flex flex-col sm:flex-row rounded-xl overflow-hidden border border-transparent shadow-3xl">
                 {{-- img --}}
                 <div class="w-full sm:w-1/2 h-[300px] sm:h-[685px] overflow-hidden">
@@ -44,13 +44,19 @@
                         <p class="mt-2">
                             {{ $building->details->infoSection2 }}
                         <ul class="list-disc list-inside mt-2">
-                            @foreach (explode(' ', $building->details->infoSection3) as $item)
+                            @foreach (explode('◾', $building->details->infoSection3) as $item)
                                 <li>{{ $item }}</li>
                             @endforeach
                         </ul>
                         </p>
                         <p class="mt-2">
-                            {{ $building->details->infoSection4 }}
+
+                            <ul class="mt-2">
+                                @foreach (explode(' - ', $building->details->infoSection4) as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+
                         </p>
                     </div>
 
@@ -114,19 +120,28 @@
                                     <div class="mt-4 mb-3 md:mb-0 text-sm sm:text-base leading-relaxed">
                                         <p>Area of the apartment: {{ $apartment->area }} м<sup>2</sup>
                                         </p>
+
                                         <p class="mt-2">
                                             {{ $apartment->apartment_type }}
                                         </p>
+
+                                        <ul>
+                                            @foreach ($apartment->rooms as $room)
+                                                <li>{{ $loop->iteration }}. {{ $room->room }}: {{ $room->area }}м<sup>2</sup></li>
+                                            @endforeach
+                                        </ul>
+
                                         <p class="mt-2">
                                             {{ $apartment->info }}
                                         </p>
+
                                     </div>
 
-                                    <div class="w-full md:w-[80%] overflow-hidden my-5">
+                                    {{-- <div class="w-full md:w-[80%] overflow-hidden my-5">
                                         <img class="w-full h-full object-contain"
                                             src="{{ asset('storage/' . $apartment->photo_pathTwo) }}" alt="Project Image"
                                             draggable="false">
-                                    </div>
+                                    </div> --}}
 
                                     <div class="mt-auto items-center">
                                         <button class="bg-green-500/20 px-3 py-1 text-xs rounded-xl font-bold"
@@ -144,6 +159,6 @@
     </div>
 
 
-    {{-- <x-footer> </x-footer> --}}
+
 
 </x-layout>
