@@ -1,6 +1,6 @@
 @props(['label' => null, 'name'])
 
-<div class="flex items-center justify-center space-x-4 ">
+<div class="flex flex-col justify-center">
     @if ($label)
         <x-forms.label :name="$name" :label="$label" />
     @endif

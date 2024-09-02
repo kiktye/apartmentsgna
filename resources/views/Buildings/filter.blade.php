@@ -1,7 +1,7 @@
 <x-layout>
 
 <div class="bg-shadowed pt-10 pb-[85px]">
-    <x-forms.form action="{{ route('buildings.filter') }}" class="text-shadowed">
+    <x-forms.form action="{{ route('buildings.filter') }}" class="text-shadowed flex justify-center items-center">
         <x-forms.field name="status">
             <x-forms.checkbox
             label="All Buildings"

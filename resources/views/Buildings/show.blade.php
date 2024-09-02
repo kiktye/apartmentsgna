@@ -1,6 +1,7 @@
 <x-layout>
 
     <div class="bg-gna min-h-[80vh] pb-0 md:pb-[55px] flex flex-col items-center justify-center relative overflow-hidden">
+
         <!-- Building Container -->
         <div class="w-[80%] mx-auto flex justify-center py-7 text-shadowed" id="buildingContainer">
             <div class="flex flex-col sm:flex-row rounded-xl overflow-hidden border border-transparent shadow-3xl">
@@ -156,6 +157,7 @@
                 <div class="swiper-pagination"></div>
             </div>
         </div>
+        
     </div>
 
 
