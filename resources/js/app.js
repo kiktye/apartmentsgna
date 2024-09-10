@@ -107,75 +107,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Show Details Container
-    document.getElementById("detailsButton").addEventListener("click", function () {
-        const buildingContainer = document.getElementById("buildingContainer");
-        const swiperContainer = document.getElementById("swiperContainer");
-        const swiperWrapper = document.getElementById("swiperWrapper");
-
-        const initialScrollY = window.scrollY;
-
-        gsap.to(buildingContainer, {
-            duration: 0.35,
-            x: "-100%",
-            opacity: 0,
-            onComplete: function () {
-                buildingContainer.style.display = "none";
-                buildingContainer.classList.add("hidden");
-                swiperContainer.style.display = "block";
-                swiperWrapper.classList.remove("hidden");
-
-                if (initialScrollY > 0) {
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                }
-
-                gsap.from(swiperContainer, {
-                    duration: 0.35,
-                    x: "100%",
-                    opacity: 0,
-                });
-            },
-        });
-    });
-
-    // Go Back Button
-    document.querySelectorAll("#backButton").forEach((button) => {
-        button.addEventListener("click", function () {
-            const buildingContainer = document.getElementById("buildingContainer");
-            const swiperContainer = document.getElementById("swiperContainer");
-            const swiperWrapper = document.getElementById("swiperWrapper");
-
-            swiperContainer.style.display = "none";
-            buildingContainer.style.display = "block";
-            swiperWrapper.classList.add("hidden");
-            buildingContainer.classList.remove("hidden");
-
-            if (window.scrollY > 0) {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-
-            gsap.fromTo(
-                buildingContainer,
-                {
-                    x: "-100%",
-                    opacity: 0,
-                },
-                {
-                    duration: 0.3,
-                    x: "0%",
-                    opacity: 1,
-                }
-            );
-        });
-    });
-
     // Carousel Swiper
-    var swiper = new Swiper(".swiper-container", {
+    var swiper = new Swiper(".swiper", {
         loop: false,
-        centeredSlides: true,
+        centeredSlides: false,
         slidesPerView: 1,
-        spaceBetween: 20,
-        slideToClickedSlide: true,
+        spaceBetween: 0,
+        slideToClickedSlide: false,
         pagination: {
             el: ".swiper-pagination",
             clickable: true,
@@ -185,11 +123,13 @@ document.addEventListener("DOMContentLoaded", function () {
             prevEl: ".swiper-button-prev",
         },
         breakpoints: {
-            640: {
-                spaceBetween: 5,
-            },
             768: {
+                slidesPerView: 2,
                 spaceBetween: 20,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 30,
             },
         },
     });

@@ -1,166 +1,190 @@
 <x-layout>
 
-    <div class="bg-gna min-h-[80vh] pb-0 md:pb-[55px] flex flex-col items-center justify-center relative overflow-hidden">
-
-        <!-- Building Container -->
-        <div class="w-[80%] mx-auto flex justify-center py-7 text-shadowed" id="buildingContainer">
-            <div class="flex flex-col sm:flex-row rounded-xl overflow-hidden border border-transparent shadow-3xl">
-                {{-- img --}}
-                <div class="w-full sm:w-1/2 h-[300px] sm:h-[685px] overflow-hidden">
-                    <img class="w-full h-full object-cover object-center"
-                        src="{{ asset('storage/' . $building->photo_path) }}" alt="Project Image" draggable="false">
+    <div class="bg-gna py-10 min-h-[81.3vh]">
+        <div class="w-[80%] mx-auto flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5 md:border-t md:border-r border-white/5 rounded-xl">
+            {{-- Images --}}
+            <div class="flex flex-col md:flex-row items-center w-full md:w-1/2">
+                <div id="thumbnails"
+                    class="flex flex-row md:flex-col space-x-2 md:space-x-0 md:space-y-4 w-full md:w-[12.5%] mr-2 md:mr-0">
+                    @foreach ($building->photos as $photo)
+                        @if (!$photo->is_main)
+                            <img src="{{ asset('storage/' . $photo->photo_path) }}"
+                                class="w-16 h-16 md:w-auto md:h-auto rounded opacity-50 hover:opacity-100 hover:scale-110 cursor-pointer transition duration-300"
+                                onclick="swapImage(this)" draggable="false">
+                        @endif
+                    @endforeach
                 </div>
 
-                <div class="px-6 py-9 flex flex-col sm:w-1/2">
-                    <div class="self-start text-sm font-semibold mb-2">
-                        <i class="fa-solid fa-location-dot text-sm"></i> {{ $building->location }}
+
+                <div class="flex-grow mt-4 md:mt-0 md:ml-4">
+                    <img id="mainImage"
+                        src="{{ asset('storage/' . $building->photos->where('is_main', true)->first()->photo_path) }}"
+                        class="w-full rounded transition duration-300" draggable="false">
+                </div>
+            </div>
+
+            <!-- Building Information -->
+            <div class="flex flex-col w-full md:w-[40%] text-shadowed ">
+                <div class="self-start text-sm font-semibold mb-2">
+                    <i class="fa-solid fa-location-dot text-sm mt-2"></i> {{ $building->location }}
+                </div>
+
+                <div class="py-2">
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wider">
+                        {{ $building->name }}
+                    </h3>
+
+                    <p class="sm:text-sm font-semibold  mb-3 text-xs tracking-widest uppercase">
+                        {{ $building->description }}
+                    </p>
+
+                    <div class="flex space-x-3 items-center mt-2">
+                        @if ($building->status == 'In Progress')
+                            <div
+                                class="bg-accent/20 cursor-default px-3 py-1 text-xs rounded-xl font-bold transition-colors duration-300">
+                                {{ $building->status }}
+                            </div>
+                        @elseif ($building->status == 'Finished')
+                            <div
+                                class="bg-green-500/20 cursor-default px-3 py-1 text-xs rounded-xl font-bold transition-colors duration-300">
+                                {{ $building->status }}
+                            </div>
+                        @endif
                     </div>
+                </div>
 
-                    <div class="py-2">
-                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold truncate">
-                            {{ $building->name }}
-                        </h3>
-
-                        <p class="text-base sm:text-lg font-semibold text-nowrap">
-                            {{ $building->description }}
-                        </p>
-
-                        <div class="flex space-x-3 items-center mt-2">
-                            @if ($building->status == 'In Progress')
-                                <div
-                                    class="bg-accent/20 cursor-default px-3 py-1 text-xs rounded-xl font-bold transition-colors duration-300">
-                                    {{ $building->status }}
-                                </div>
-                            @elseif ($building->status == 'Finished')
-                                <div
-                                    class="bg-green-500/20 cursor-default px-3 py-1 text-xs rounded-xl font-bold transition-colors duration-300">
-                                    {{ $building->status }}
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="mt-4 text-sm font-semibold leading-relaxed mb-3 md:mb-0">
-                        <p> {{ $building->details->infoSection1 }} </p>
-                        <p class="mt-2">
-                            {{ $building->details->infoSection2 }}
-                        <ul class="list-disc list-inside mt-2">
-                            @foreach (explode('◾', $building->details->infoSection3) as $item)
-                                <li>{{ $item }}</li>
-                            @endforeach
-                        </ul>
-                        </p>
-                        <p class="mt-2">
-
-                            <ul class="mt-2">
-                                @foreach (explode(' - ', $building->details->infoSection4) as $item)
-                                    <li>{{ $item }}</li>
-                                @endforeach
-                            </ul>
-
-                        </p>
-                    </div>
-
-                    <div class="mt-auto items-center">
-                        <button class="bg-blue-500/20 px-3 py-1 text-xs rounded-xl font-bold"
-                            id="detailsButton">Apartment Types</button>
-                        <a href="{{ session('back_url', '/') }}"
-                            class="bg-green-500/20 px-3 py-1 text-xs rounded-xl font-bold">Back</a>
-                    </div>
+                <!-- Building Details -->
+                <div class="mt-4 text-sm font-semibold leading-relaxed mb-3 md:mb-0 text-jako">
+                    <p> {{ $building->details->infoSection1 }} </p>
+                    <p class="mt-2">
+                        {{ $building->details->infoSection2 }}
+                    <ul class="list-disc list-inside mt-2">
+                        @foreach (explode('◾', $building->details->infoSection3) as $item)
+                            <li>{{ $item }}</li>
+                        @endforeach
+                    </ul>
+                    </p>
+                    <p class="mt-2">
+                    <ul class="mt-2">
+                        @foreach (explode(' - ', $building->details->infoSection4) as $item)
+                            <li>{{ $item }}</li>
+                        @endforeach
+                    </ul>
+                    </p>
                 </div>
             </div>
         </div>
-        
 
-        <!-- Swiper Container -->
-        <div class="w-[80%] mx-auto justify-center pt-8 hidden pb-[35px]" id="swiperWrapper">
-            <div class="swiper-container flex justify-center items-center overflow-hidden text-shadowed font-semibold shadow-3xl rounded-xl"
-                id="swiperContainer">
+        <h1
+            class="font-bold text-center py-10 text-accent text-[45px] leading-relaxed tracking-widest italic uppercase">
+            apartments
+        </h1>
+
+        <div x-data="{ openModal: null }">
+            <!-- Swiper Wrapper -->
+            <div class="swiper w-full sm:w-[50%] mx-auto overflow-hidden text-shadowed" id="swiperWrapper">
                 <div class="swiper-wrapper">
                     @foreach ($building->apartments as $apartment)
-                        <div class="swiper-slide">
-                            <div
-                                class="flex flex-col sm:flex-row-reverse rounded-xl overflow-hidden border border-transparent">
-                                <!-- IMG -->
-                                <div class="w-full sm:w-1/2 h-[300px] sm:h-[685px] overflow-hidden">
-                                    <img class="w-full h-full object-contain"
-                                        src="{{ asset('storage/' . $apartment->photo_path) }}" alt="Project Image"
-                                        draggable="false">
-                                </div>
+                        <div
+                            class="swiper-slide overflow-hidden first:ml-[3.5rem] space-x-0 md:first:ml-0 md:space-x-10">
+                            <div class="max-w-xs sm:max-w-sm border border-black rounded-lg">
+                                <img class="w-full h-full object-contain rounded-t-lg"
+                                    src="{{ asset('storage/' . $apartment->photo_pathTwo) }}" alt="Project Image"
+                                    draggable="false">
+                                <div class="p-5">
+                                    <h5 class="text-xl sm:text-2xl font-bold tracking-widest uppercase">
+                                        {{ $apartment->area }} <span class="text-sm">m<sup>2</sup></span>
+                                    </h5>
+                                    <p class="mb-3 font-medium text-xs tracking-widest uppercase">
+                                        Apartments: <span class="text-sm"> {{ implode(' | ', $apartment->apartments) }}
+                                        </span>
+                                    </p>
 
-                                <div class="px-6 py-9 flex flex-col sm:w-1/2">
-                                    <div class="self-start text-sm font-semibold mb-2">
-                                        <i class="fa-solid fa-location-dot text-sm"></i>
-                                        {{ $apartment->building->location }}
-                                    </div>
-
-                                    <div class="py-2">
-                                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold truncate">
-                                            {{ $apartment->building->name }}
-                                        </h3>
-
-                                        <p class="text-base sm:text-lg font-semibold text-nowrap">
-                                            Apartments: {{ implode(' | ', $apartment->apartments) }}
-                                        </p>
-
-                                        <div class="flex space-x-3 items-center mt-2">
-                                            @if ($building->status == 'In Progress')
-                                                <div
-                                                    class="bg-accent/20 cursor-default px-3 py-1 text-xs rounded-xl font-bold transition-colors duration-300">
-                                                    {{ $building->status }}
-                                                </div>
-                                            @elseif ($building->status == 'Finished')
-                                                <div
-                                                    class="bg-green-500/20 cursor-default px-3 py-1 text-xs rounded-xl font-bold transition-colors duration-300">
-                                                    {{ $building->status }}
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="mt-4 mb-3 md:mb-0 text-sm sm:text-base leading-relaxed">
-                                        <p>Area of the apartment: {{ $apartment->area }} м<sup>2</sup>
-                                        </p>
-
-                                        <p class="mt-2">
-                                            {{ $apartment->apartment_type }}
-                                        </p>
-
-                                        <ul>
-                                            @foreach ($apartment->rooms as $room)
-                                                <li>{{ $loop->iteration }}. {{ $room->room }}: {{ $room->area }}м<sup>2</sup></li>
-                                            @endforeach
-                                        </ul>
-
-                                        <p class="mt-2">
-                                            {{ $apartment->info }}
-                                        </p>
-
-                                    </div>
-
-                                    {{-- <div class="w-full md:w-[80%] overflow-hidden my-5">
-                                        <img class="w-full h-full object-contain"
-                                            src="{{ asset('storage/' . $apartment->photo_pathTwo) }}" alt="Project Image"
-                                            draggable="false">
-                                    </div> --}}
-
-                                    <div class="mt-auto items-center">
-                                        <button class="bg-green-500/20 px-3 py-1 text-xs rounded-xl font-bold"
-                                            id="backButton">Back</button>
-                                    </div>
+                                    <!-- More Info Button -->
+                                    <button @click="openModal = {{ $apartment->id }}"
+                                        class="bg-accent/50 py-2 px-3 rounded-lg font-semibold text-xs sm:text-sm text-gna uppercase">
+                                        Apt. Details
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
                 <!-- Pagination -->
-                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+
+            <!-- Global Modal (for displaying apartment details) -->
+            <div x-show="openModal !== null" class="fixed inset-0 bg-gna/70 flex justify-center items-center z-50"
+                style="display: none;" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform scale-100"
+                x-transition:enter-end="opacity-100 transform scale-100"
+                x-transition:leave="transition ease-in duration-300"
+                x-transition:leave-start="opacity-100 transform scale-100"
+                x-transition:leave-end="opacity-0 transform scale-100">
+
+                <div class="bg-shadowed text-gna p-6 rounded-lg w-[90%] sm:w-full max-w-lg mx-2 sm:mx-auto">
+                    <h3
+                        class="text-lg sm:text-xl font-bold text-accent leading-relaxed tracking-widest italic uppercase">
+                        Apartment Details</h3>
+
+                    <!-- Apartment Details -->
+                    @foreach ($building->apartments as $apartment)
+                        <div x-show="openModal === {{ $apartment->id }}">
+                            <p class="font-semibold text-xs sm:text-sm tracking-widest uppercase">
+                                Area of the apartment:
+                                <span class="text-[1rem] sm:text-[1.2rem]">{{ $apartment->area }} м<sup>2</sup></span>
+                            </p>
+
+                            <img class="w-full h-full object-contain rounded-t-lg"
+                                src="{{ asset('storage/' . $apartment->photo_path) }}" alt="Apartment Image"
+                                draggable="false">
+
+                            <p class="mt-2 font-semibold text-xs sm:text-sm tracking-widest uppercase">
+                                Apartment type:
+                                <span class="text-[1rem]">{{ $apartment->apartment_type }}</span>
+                            </p>
+                            <ul class="columns-1 sm:columns-2">
+                                @foreach ($apartment->rooms as $room)
+                                    <li class="font-semibold text-xs sm:text-sm">{{ $loop->iteration }}.
+                                        {{ $room->room }}:
+                                        <span class="text-[1rem]"> {{ $room->area }} м<sup>2</sup></span>
+                                    </li>
+                                @endforeach
+                            </ul>
+
+                            <p class="mt-2 font-semibold text-xs sm:text-sm tracking uppercase w-full">
+                                {{ $apartment->info }}</p>
+                        </div>
+                    @endforeach
+
+                    <!-- Close Button -->
+                    <button @click="openModal = null"
+                        class="mt-4 bg-accent/50 py-2 px-3 rounded-lg font-semibold text-xs sm:text-sm text-gna uppercase">
+                        Close
+                    </button>
+                </div>
+
             </div>
         </div>
-        
     </div>
 
 
 
+    <script src="//unpkg.com/alpinejs" defer></script>
+
+    <script>
+        function swapImage(thumbnail) {
+            const mainImage = document.getElementById('mainImage');
+
+            // Store current main image source
+            const currentMainImageSrc = mainImage.src;
+
+            // Swap main image with clicked thumbnail
+            mainImage.src = thumbnail.src;
+            thumbnail.src = currentMainImageSrc;
+        }
+    </script>
 
 </x-layout>

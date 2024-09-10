@@ -10,6 +10,7 @@ export default {
       colors: {
         "black": "rgb(14, 16, 17)",
         "font": "rgb(255, 255, 255, 0.3)",
+        "jako": "rgb(255, 255, 255, 0.8)",
         "shadowed": "rgb(222, 222, 222)",
         "border": "rgba(255, 255, 255, 0.04)",
         "gna": "#282627",

@@ -9,10 +9,11 @@
     <link rel="icon" href="{{ Vite::asset('resources/images/gna-logo.jpg') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+    <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://kit.fontawesome.com/f5fd16f46e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -112,13 +113,20 @@
                         <x-nav-link href="{{ route('buildings.filter') }}" :active="request()->is('buildings/filter')">Buildings</x-nav-link>
                         <x-nav-link href="{{ route('about') }}" :active="request()->is('about')">About</x-nav-link>
                         <x-nav-link href="{{ route('contact') }}" :active="request()->is('contact')">Contact</x-nav-link>
-                        <x-nav-link href="{{ asset('assets/V2 -Станбено Деловен Комплекс TWINS - Каталог.pdf') }}" target="_blank">Catalog</x-nav-link>
+                        <x-nav-link href="{{ asset('assets/V2 -Станбено Деловен Комплекс TWINS - Каталог.pdf') }}"
+                            target="_blank">Catalog</x-nav-link>
                     </div>
                 </div>
 
                 <!-- Right section -->
-                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <!-- Additional right section items can be added here -->
+                <div class="absolute hidden inset-y-0 right-0 md:flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <div class="font-bold text-xs md:text-sm tracking-widest uppercase text-wrap w-[170px]">
+                        call us now
+                        <div class="text-gna">
+                            <p>070/345-177 Vane</p>
+                            <p>070/300-639 Nikola</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -131,7 +139,8 @@
             <x-nav-link href="{{ route('buildings.filter') }}" :active="request()->is('buildings/filter')">Buildings</x-nav-link>
             <x-nav-link href="{{ route('about') }}" :active="request()->is('about')">About</x-nav-link>
             <x-nav-link href="{{ route('contact') }}" :active="request()->is('contact')">Contact</x-nav-link>
-            <x-nav-link href="{{ asset('assets/V2 -Станбено Деловен Комплекс TWINS - Каталог.pdf') }}">Catalog</x-nav-link>
+            <x-nav-link href="{{ asset('assets/V2 -Станбено Деловен Комплекс TWINS - Каталог.pdf') }}"
+                target="_blank">Catalog</x-nav-link>
         </div>
     </div>
 

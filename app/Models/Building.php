@@ -26,4 +26,9 @@ class Building extends Model
     {
         return $this->hasOne(BuildingDetail::class)->withDefault();
     }
+
+    public function photos()
+    {
+        return $this->hasMany(BuildingPhoto::class);
+    }
 }
