@@ -7,4 +7,4 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
-*public/assets/V2[[:space:]]-Станбено[[:space:]]Деловен[[:space:]]Комплекс[[:space:]]TWINS[[:space:]]-[[:space:]]Каталог.pdf filter=lfs diff=lfs merge=lfs -text
+*catalog-twins.pdf filter=lfs diff=lfs merge=lfs -text
