@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="mt-8" id="second-paragraph">
-                    <a href="{{ asset('assets/catalog-twins.pdf') }}" target="_blank"
+                    <a href="{{ asset('assets/catalog.pdf') }}" target="_blank"
                         class="bg-gna/20 py-4 px-8 rounded-lg font-semibold text-sm text-gna uppercase">Catalog</a>
                 </div>
             </div>
