@@ -12,4 +12,3 @@ Route::get('/buildings/{building}', [BuildingController::class, 'show']);
 
 
 Route::view('/contact', 'contact')->name('contact');
-Route::view('/about', 'about')->name('about');

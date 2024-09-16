@@ -1,7 +1,8 @@
 <x-layout>
 
     <div class="bg-gna py-10 min-h-[81.3vh]">
-        <div class="w-[80%] mx-auto flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5 md:border-t md:border-r border-white/5 rounded-xl">
+        <div
+            class="w-[80%] mx-auto flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5 md:border-t md:border-r border-white/5 rounded-xl">
             {{-- Images --}}
             <div class="flex flex-col md:flex-row items-center w-full md:w-1/2">
                 <div id="thumbnails"
@@ -30,7 +31,7 @@
                 </div>
 
                 <div class="py-2">
-                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wider">
+                    <h3 class="text-3xl md:text-[2.8rem] font-bold uppercase tracking-wider">
                         {{ $building->name }}
                     </h3>
 
@@ -54,13 +55,20 @@
                 </div>
 
                 <!-- Building Details -->
-                <div class="mt-4 text-sm font-semibold leading-relaxed mb-3 md:mb-0 text-jako">
+                <div class="mt-4 text-sm font-semibold leading-relaxed mb-3 md:mb-0 text-basic font-hanken-grotesk">
                     <p> {{ $building->details->infoSection1 }} </p>
                     <p class="mt-2">
                         {{ $building->details->infoSection2 }}
-                    <ul class="list-disc list-inside mt-2">
+                    <ul class="mt-2">
                         @foreach (explode('◾', $building->details->infoSection3) as $item)
-                            <li>{{ $item }}</li>
+                            <li class="flex md:items-center">
+                                <svg width="11" height="9" viewBox="0 0 17 16" fill="none"
+                                    class="self-start mt-2 mr-2">
+                                    <ellipse cx="6.5" cy="6" rx="6" ry="6.5"
+                                        transform="rotate(90 6.5 6)" fill="#FFA500" />
+                                </svg>
+                                {{ $item }}
+                            </li>
                         @endforeach
                     </ul>
                     </p>
@@ -71,7 +79,15 @@
                         @endforeach
                     </ul>
                     </p>
+
+                    <div class="mt-4">
+                        <a href="/contact"
+                            class="bg-accent py-2 px-4 rounded text-sm text-black tracking-wide uppercase">Contact us</a>
+                    </div>
+
                 </div>
+
+
             </div>
         </div>
 
@@ -141,7 +157,12 @@
                                 src="{{ asset('storage/' . $apartment->photo_path) }}" alt="Apartment Image"
                                 draggable="false">
 
-                            <p class="mt-2 font-semibold text-xs sm:text-sm tracking-widest uppercase">
+                            <p class="mt-2 font-semibold text-xs tracking-widest uppercase">
+                                Apartments: <span class="text-sm"> {{ implode(' | ', $apartment->apartments) }}
+                                </span>
+                            </p>
+
+                            <p class="font-semibold text-xs sm:text-sm tracking-widest uppercase">
                                 Apartment type:
                                 <span class="text-[1rem]">{{ $apartment->apartment_type }}</span>
                             </p>
@@ -168,6 +189,8 @@
 
             </div>
         </div>
+
+
     </div>
 
 

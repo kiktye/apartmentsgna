@@ -3,7 +3,7 @@
     <div class="bg-shadowed py-10">
 
         <div
-            class="w-[80%] mx-auto h-auto min-h-[66vh] pb-0 md:pb-[55px] flex flex-col md:flex-row justify-evenly items-center ">
+            class="w-[80%] mx-auto h-auto min-h-[66vh] pb-[30px] md:pb-[55px] flex flex-col md:flex-row justify-evenly items-center">
 
             <div class="text-left mb-10">
                 <div class="flex flex-col">
@@ -97,31 +97,59 @@
                 </div>
             </div>
 
-            <div class="flex flex-col space-y-6 items-center mt-10">
+            <div class="flex flex-col items-center">
 
-                <h1 class="font-bold text-gna text-[20px] leading-none tracking-wide uppercase">
-                    Send us a message
-                </h1>
-                
                 <x-forms.form method="POST" action="#" class="space-y-6">
 
-                    <x-forms.input label="Your name" name="name" />
-                    <x-forms.input label="Your email" name="email" />
+                    <div class="md:flex md:space-x-4 md:space-y-0 block space-y-6">
+                        <x-forms.input label="Your name" name="name" />
+                        <x-forms.input label="Your email" name="email" />
+                    </div>
 
                     <x-forms.textarea label="Your message" name="description" value="{{ old('description') }}" />
 
                     <x-forms.divider />
 
-                    <x-forms.button>Send</x-forms.button>
-
+                    <div class="flex justify-center md:justify-end">
+                        <x-forms.button>Submit</x-forms.button>
+                    </div>
                 </x-forms.form>
             </div>
 
         </div>
 
+        <div
+            class="w-[80%] mx-auto h-auto min-h-[66vh] pb-0 md:pb-[55px] flex flex-col md:flex-row justify-evenly items-center ">
 
+
+            <div class="flex flex-col space-y-6 items-center mt-10 px-4 md:px-0">
+
+                <h1
+                    class="font-bold text-gna text-[28px] md:text-[33px] leading-none tracking-widest uppercase text-center">
+                    Location of <span class="text-[40px] md:text-[45px] italic text-accent">TWINS</span> Complex
+                </h1>
+
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2990.9246269721893!2d22.62405397656811!3d41.44085709267612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDHCsDI2JzI3LjEiTiAyMsKwMzcnMzUuOSJF!5e0!3m2!1sen!2smk!4v1726488942425!5m2!1sen!2smk"
+                    width="100%" height="300" style="border:0;" allowfullscreen="1" loading="lazy"
+                    class="rounded-xl shadow-3xl md:h-[500px] md:w-[1150px]"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+                <p class="text-gna/20 text-xs md:text-sm font-semibold w-full md:w-[60%] text-center">
+                    Due to the unique location of the new TWINS COMPLEX, our future tenants will have quick access to a
+                    market, pharmacy, kindergarten, police station, post office, as well as the city center, without
+                    sacrificing peace and privacy.
+                </p>
+            </div>
+
+        </div>
 
     </div>
+
+
+
+
 
 
     <x-footer> </x-footer>

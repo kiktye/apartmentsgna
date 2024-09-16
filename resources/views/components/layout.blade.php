@@ -75,7 +75,7 @@
     </div>
 
 
-    <nav class="py-10 px-4 md:px-10 text-black bg-shadowed drop-shadow-lg">
+    <nav class="py-7 px-4 md:px-10 text-black bg-shadowed drop-shadow-lg">
         <div class="md:w-[80%] md:mx-auto">
             <div class="relative flex items-center justify-between h-16">
                 <!-- Mobile menu button -->
@@ -98,7 +98,7 @@
 
                 <!-- Logo -->
                 <div class="flex items-center justify-center flex-1 sm:flex-none">
-                    <div class="w-[8rem] h-[8rem] md:w-[7rem] md:h-[7rem]">
+                    <div class="w-[6rem] h-[6rem] md:w-[6rem] md:h-[6rem]">
                         <a href="/" draggable="false">
                             <img class="rounded-full" draggable="false"
                                 src="{{ Vite::asset('resources/images/gna-logo.jpg') }}" alt="Logo">
@@ -111,7 +111,6 @@
                     <div class="flex space-x-4">
                         <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
                         <x-nav-link href="{{ route('buildings.filter') }}" :active="request()->is('buildings/filter')">Buildings</x-nav-link>
-                        <x-nav-link href="{{ route('about') }}" :active="request()->is('about')">About</x-nav-link>
                         <x-nav-link href="{{ route('contact') }}" :active="request()->is('contact')">Contact</x-nav-link>
                         <x-nav-link href="{{ asset('assets/catalog.pdf') }}"
                             target="_blank">Catalog</x-nav-link>
@@ -120,13 +119,7 @@
 
                 <!-- Right section -->
                 <div class="absolute hidden inset-y-0 right-0 md:flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <div class="font-bold text-xs md:text-sm tracking-widest uppercase text-wrap w-[170px]">
-                        call us now
-                        <div class="text-gna">
-                            <p>070/345-177 Vane</p>
-                            <p>070/300-639 Nikola</p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -137,7 +130,6 @@
         <div class="space-y-1 px-2 pb-3 pt-2 transition-all duration-300">
             <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
             <x-nav-link href="{{ route('buildings.filter') }}" :active="request()->is('buildings/filter')">Buildings</x-nav-link>
-            <x-nav-link href="{{ route('about') }}" :active="request()->is('about')">About</x-nav-link>
             <x-nav-link href="{{ route('contact') }}" :active="request()->is('contact')">Contact</x-nav-link>
             <x-nav-link href="{{ asset('assets/catalog.pdf') }}"
                 target="_blank">Catalog</x-nav-link>

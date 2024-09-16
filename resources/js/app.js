@@ -89,20 +89,31 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener("scroll", () => {
         const scrollPos = window.scrollY;
         const introHeight = introText.offsetHeight;
-
+    
         const opacity = 1 - Math.min(scrollPos / introHeight, 1);
+        
+        let yOffsetText = -scrollPos * 0.05;
+        let yOffsetImage = -scrollPos * 0.1;
+        let opacityDuration = 0.5;
+    
 
+        if (window.innerWidth <= 768) {
+            yOffsetText = -scrollPos * 0.03; 
+            yOffsetImage = -scrollPos * 0.05; 
+            opacityDuration = 1.8; 
+        }
+    
         gsap.to("#first-paragraph, #second-paragraph", {
-            y: -scrollPos * 0.05,
+            y: yOffsetText,
             opacity: opacity,
-            duration: 0.5,
+            duration: opacityDuration,
             ease: "power2.out",
         });
-
+    
         gsap.to("#image-container", {
-            y: -scrollPos * 0.1,
+            y: yOffsetImage,
             opacity: opacity,
-            duration: 2,
+            duration: opacityDuration * 2,
             ease: "power2.out",
         });
     });

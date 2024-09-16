@@ -1,4 +1,4 @@
-<div class="bg-shadowed pt-6 pb-[85px]">
+<div class="bg-shadowed md:pt-10 md:pb-[65px] py-10">
 
     <div class="w-[80%] mx-auto h-auto md:h-[75vh] flex flex-col-reverse md:flex-row justify-evenly items-center">
 
@@ -15,10 +15,10 @@
                     </h2>
                 </div>
 
-                <h1 class="font-bold text-gna text-[40px] md:text-[60px] leading-none tracking-wide uppercase"
+                <h1 class="font-bold text-gna text-[40px] md:text-[65px] leading-none tracking-wide uppercase"
                     id="first-paragraph">
                     Building
-                    <br> <span class="text-[60px] md:text-[95px]">YOUR</span> <br> Future Home
+                    <br> <span class="text-[60px] md:text-[100px]">YOUR</span> <br> Future Home
                 </h1>
 
                 <div class="border-l border-white p-2 mt-4 text-wrap w-full md:w-1/2 mx-auto md:mx-0"
